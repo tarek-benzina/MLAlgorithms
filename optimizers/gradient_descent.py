@@ -5,13 +5,13 @@ learning algorithms
 import types
 import numpy as np
 class GradientDescent():
-    def __init__(self,func,grad_func,initial_value,nb_iters,alpha,accuracy):
+    def __init__(self,func,grad_func,initial_value,nb_iters,alpha,precision):
         self.func=func
         self.grad_func=grad_func
         self.initial_value = initial_value
         self.nb_iters=nb_iters
         self.alpha=alpha
-        self.accuracy=accuracy
+        self.precision=precision
     @property
     def func(self):
         """getter of the attribute func
@@ -79,24 +79,24 @@ class GradientDescent():
         else:
             self.__alpha = alpha
     @property
-    def accuracy(self):
-        """getter of the attribute accuracy
+    def precision(self):
+        """getter of the attribute precision
         Returns:
-            float -- accuracy of the minimum
+            float -- precision of the minimum
         """
-        return self.__accuracy
-    @accuracy.setter
-    def accuracy(self,accuracy):
-        if not isinstance(accuracy,float):
-            raise TypeError("accuracy needs to be a float")
+        return self.__precision
+    @precision.setter
+    def precision(self,precision):
+        if not isinstance(precision,float):
+            raise TypeError("precision needs to be a float")
         else:
-            self.__accuracy = accuracy
+            self.__precision = precision
     def optimize(self):
         x = self.initial_value
         for i in range(self.nb_iters):
             previous_x = x
             x = x - self.alpha * self.grad_func(x)
             diff = x-previous_x
-            if(np.linalg.norm(x-previous_x)<self.accuracy):
+            if(np.linalg.norm(x-previous_x)<self.precision):
                 break
         return x
